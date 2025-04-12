@@ -15,16 +15,16 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="footer-content-center">
-                    <h2>Company</h2>
+                    <h2>Công ty</h2>
                     <ul>
-                        <li>Home</li>
-                        <li>About us</li>
-                        <li>Delivery</li>
-                        <li>Privacy Policy</li>
+                        <li>Trang chủ</li>
+                        <li>Về chúng tôi</li>
+                        <li>Vận chuyển</li>
+                        <li>Chính sách bảo mật</li>
                     </ul>
                 </div>
                 <div className="footer-content-right">
-                    <h2>Get In Touch</h2>
+                    <h2>Liên hệ</h2>
                     <ul>
                         <li>0344-394-856</li>
                         <li>ducok123aa@gmail.com</li>
@@ -32,7 +32,7 @@ const Footer = () => {
                 </div>
             </div>
             <hr />
-            <p className="footer-copyright">Copyright 2025 Tomato.com - All Rhight.</p>
+            <p className="footer-copyright">BDU 2025 Tomato CHUYÊN ĐỀ - NHÓM 8.</p>
         </div>
     )
 }

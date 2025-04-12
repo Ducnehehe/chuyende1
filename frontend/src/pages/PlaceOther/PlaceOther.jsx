@@ -1,30 +1,45 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './PlaceOther.css'
 import { StoreContext } from '../../context/StoreContext'
 
 const PlaceOther = () => {
 
-  const {getTotalCartAmount} = useContext (StoreContext);
-
+  const {getTotalCartAmount,token,food_list,cartItems,url} = useContext (StoreContext);
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    street: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    country: "",
+    phone: ""
+  });
+  const onChangeHandler = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setData(data => ({...data, [name]: value}));
+}
   return (
     <form className='place-order'>
       <div className="place-order-left">
-        <p className="title">Delivery Information</p>
+        <p className="title">Thông tin giao hàng</p>
         <div className="multi-fields">
-          <input type="text" placeholder='First name' />
-          <input type="text" placeholder='Last name'/>
+          <input name='firstName' onChange={onChangeHandler} value={data.firstName} type="text" placeholder='Tên đầu tiên' />
+          <input name='lastName' onChange={onChangeHandler} value={data.lastName} type="text" placeholder='Họ'/>
         </div>
-        <input type="email" placeholder='Email address'/>
-        <input type="text" placeholder='Street'/>
+        <input name='email' onChange={onChangeHandler} value={data.email} type="email" placeholder='Địa chỉ email'/>
+        <input type="text" placeholder='Đường phố'/>
         <div className="multi-fields">
-          <input type="text" placeholder='City' />
-          <input type="text" placeholder='State'/>
+          <input type="text" placeholder='Thành phố' />
+          <input type="text" placeholder='Tình trạng'/>
         </div>
         <div className="multi-fields">
-          <input type="text" placeholder='Zip code' />
-          <input type="text" placeholder='Country'/>
+          <input type="text" placeholder='Mã bưu chính' />
+          <input type="text" placeholder='Quốc gia'/>
         </div>
-        <input type="text" placeholder='Phone' />
+        <input type="text" placeholder='Điện thoại' />
       </div>
       <div className="place-order-right">
       <div className='cart-total'>
