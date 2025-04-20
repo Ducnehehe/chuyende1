@@ -42,7 +42,7 @@ const placeOrder = async (req, res) => {
           })
           const session = await stripe.checkout.sessions.create({
             line_items:line_items,
-            mode:"Thanh toán",
+            mode: "payment",
             success_url:`${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
             cancel_url:`${frontend_url}/verify?success=false&orderId=${newOrder._id}`,
           })
@@ -54,4 +54,51 @@ const placeOrder = async (req, res) => {
     }
 }
 
-export {placeOrder};
+const verifyOrder = async (req,res) => {
+  const  {orderId,success} = req.body;
+  try {
+    if (success=="true") {
+      await orderModel.findByIdAndUpdate(orderId,{payment:true});
+      res.json({success:true,message:"Đã thanh toán"})
+    }
+    else{
+      await orderModel.findByIdAndDelete(orderId);
+      res.json({success:false,message:"Chưa thanh toán"})
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({success:flase,message:"Lỗi"})
+  }
+}
+
+const userOrders = async (req,res) => {
+  try {
+    const orders =  await orderModel.find({userId:req.body.userId});
+    res.json({success:true,data:orders})
+  } catch (error) {
+    console.log(error);
+    res.json({success:false,message:"Lỗi"})
+  }
+}
+
+const listOrders = async (req,res) => {
+  try {
+    const orders = await orderModel.find({});
+    res.json({success:true,data:orders})
+  } catch (error) {
+    console.log(error);
+    res.json({success:false,message:"Lỗi"})
+  }
+}
+
+const updateStatus = async (req, res) => {
+  try {
+      await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status});
+      res.json({success:true,message:"Trạng thái đã cập nhật"})
+  } catch (error) {
+      console.log(error);
+      res.json({success:false,message:"Lỗi"})
+  }
+}
+
+export {placeOrder,verifyOrder,userOrders,listOrders,updateStatus};
