@@ -17,7 +17,7 @@ services:
     environment:
       - MONGO_URL=mongodb://mongo:27017/mydatabase
       - JWT_SECRET=random#secret
-      - STRIPE_SECRET_KEY=sk_test_51RCkUtQGpRGE3h7fxvsMkZLJh3dFeqFSvfjCXatMo37tmJvqsLqUyYCxD1Z35FPjqV7oWQD6sixu7sh0m2Y6Xqmu00s2mY66YU
+      - STRIPE_SECRET_KEY=
     depends_on:
       - mongo
     restart: always
